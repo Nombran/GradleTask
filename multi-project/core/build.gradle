@@ -12,7 +12,11 @@ repositories {
     }
 }
 
+
 jar {
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
     manifest {
         attributes('Implementation-Title': project.name,
                 'Implementation-Version': project.version)
